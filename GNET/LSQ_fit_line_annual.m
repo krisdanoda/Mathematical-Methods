@@ -1,4 +1,4 @@
-function lift = LSQ_fit_line_annual(data_type,filename)
+function LSQ_fit_line_annual(data_type)
 
 % vælg data_type
 % data_type = 2 betyder vertical landbevægelse
@@ -8,7 +8,7 @@ function lift = LSQ_fit_line_annual(data_type,filename)
 % eksempel:   LSQ_fit_line_annual(2)
 
 % indsast navn på data fil
-DATA=load(filename) ;
+DATA=load('KAGA_UEN.txt') ;
 
 y=DATA(:,data_type) ;
 
@@ -97,13 +97,12 @@ nmax=max(t)-min(t) ;
     predict_ann(i)= x(1)*cos( (tid(i)*F1*(pi/180)) + x(2) );
     predict(i) =  predict_lin(i) + predict_ann(i) ;
  end
-% 
-% plot(t/365.25, y,'k.') 
-% hold
-% plot(tid/365.25, predict,'r')
 
-lift = x(3)*365.25
+plot(t/365.25, y,'k.') 
+hold
+plot(tid/365.25, predict,'r')
 
-% xlabel('tid i år')
-% ylabel('bevæggelse i mm') 
-end
+x(3)*365.25
+
+xlabel('tid i år')
+ylabel('bevæggelse i mm') 

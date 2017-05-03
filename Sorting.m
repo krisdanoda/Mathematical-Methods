@@ -1,5 +1,5 @@
-cd('C:\Users\Kristofer Pedersen\Documents\MATLAB\DAY11\')
-addpath('C:\Users\Kristofer Pedersen\Documents\MATLAB\DAY11', 'C:\Users\Kristofer Pedersen\Documents\MATLAB\DAY11\elastisk deformation', 'C:\Users\Kristofer Pedersen\Documents\MATLAB\DAY11\GNET')
+
+addpath('C:\Users\Kristofer Pedersen\Documents\MATLAB\DAY11', 'C:\Users\Kristofer Pedersen\Documents\MATLAB\DAY11\elastisk deformation', 'C:\Users\Kristofer Pedersen\Documents\MATLAB\DAY11\GNET','C:\Users\Kris\Documents\DTU\Semester 4\Mathematical and Numerical Methods in Earth and Space Physics\Mathematical-Methods')
 coordinates = readtable('COORDINATES.txt')
 
 coordinates = coordinates(:,[1 2 4])
@@ -37,6 +37,8 @@ for i = 1:height(coordinates)
     Dable{i,4} = coordinates{i,1}
     Dable{i,5} = coordinates{i,2}
     Dable{i,6} = cell2mat(coordinates{i,3})
+
+
 end
 
 
