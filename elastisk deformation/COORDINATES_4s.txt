@@ -1,0 +1,5 @@
+% latitude, longitude,    station name
+%   [deg]         [deg]
+69.24041409   -51.06075233  % ILUL    
+68.71931653   -52.79334062  % AASI    
+69.22230075   -49.81462626  % KAGA    
