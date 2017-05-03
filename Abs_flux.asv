@@ -7,10 +7,10 @@ addpath('C:\Users\Kristofer Pedersen\Documents\MATLAB\DAY11\ZI_NG','C:\Users\Kri
 A = load('ZI_NG_fjeld_overfl.xy');
 front=load('ZI_NG_front.xy') ;
 A2=load('ZI_NG_05_06.xy');
-B2=load('ZI_NG_00_01.xy');
-
+B2=load('ZI_NG_12_13.xy');
 a = [400000, -1050000];
 b = [500000, -1115000];
+
 
 x = [a(1), b(1)];
 y = [a(2), b(2)];
@@ -59,8 +59,6 @@ quiver(A2(:,1),A2(:,2),x_vek,y_vek, 3, 'color', [0 1 1])
 plot(profilv_x,profilv_y,'r')
 
 is_tykkelse = A(:,4)-A(:,3);
-hastigheds_aendring_x=A2(:,3)-B2(:,3)
-hastigheds_aendring_y=A2(:,4)-B2(:,4)
 % for i=1:length(A)
 %  is_tykkelse(i)=A(i,4)-A(i,3) ;      % her beregnes is tykkelsen
 %  hastigheds_aendring_x(i)=A2(i,3)-B2(i,3) ;  % her beregnes hastigheds forskellen i x-retning 
@@ -72,8 +70,8 @@ for i = 1:length(profilv_x)
         
         if A(j,1) == profilv_x(i) && A(j,2) == profilv_y(i)
             profilv_z(i) = is_tykkelse(j) ;
-            profilv_dv_x(i) = hastigheds_aendring_x(j)
-            profilv_dv_y(i) = hastigheds_aendring_y(j)
+            profilv_dv_x(i) = x_vek(j)
+            profilv_dv_y(i) = y_vek(j)
             
         end
         
@@ -96,7 +94,7 @@ plot(front(:,1),front(:,2),'k')
 
 
 subplot(1,2,2)
-scatter(A(:,1),A(:,2),30,hastigheds_aendring_x,'fill')
+scatter(A(:,1),A(:,2),30,x_vek,'fill')
 hold
 xlabel('X - meters')
 ylabel('Y - meters')
@@ -126,9 +124,9 @@ for i=1:length(profilv_z)
     flux_x(i)=1.0 * profilv_z(i)*0.001 * profilv_dv_x(i)*0.001 * 0.917;
     flux_y(i)=1.0 * profilv_z(i)*0.001 * profilv_dv_y(i)*0.001*0.917;
 end
-
-Giga_ton_is_pr_aar = sum(flux_x)+sum(flux_y);
-
+theta = atan((X(2)-X(1))/(Y(1)-Y(2)))
+Giga_ton_is_pr_aar_1 = sum(flux_x)+sum(flux_y);
+Giga_ton_is_pr_aar_2 = sum(flux_x*sin(theta)) + sum(flux_y*sin(theta));
 
 figure(4)
 subplot(1,3,1)
