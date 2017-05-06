@@ -12,7 +12,7 @@ A=(ICEPGR5GUEN) ;
 n = height(A) ;
 
 L=A{:,1}*pi/180 ;     % bredde i grader fra input fil
-M=A{:,2}*pi/180 ;     % lï¿½ngde i grader fra input fil
+M=A{:,2}*pi/180 ;     % længde i grader fra input fil
 Vns_obs=A{:,3} ;
 Vew_obs=A{:,4} ;
 
@@ -26,7 +26,7 @@ whos
 %plon = atan(wy/wx) 
 
 T=-2.299*pi/180   % bredde for euler pol 
-P=-85.540*pi/180  % lï¿½ngde for euler pol
+P=-85.540*pi/180  % længde for euler pol
 % rotations hastighed
 w= 0.207*(pi/180)/1000000  % rotations hastighed for euler pol
 
@@ -49,6 +49,11 @@ PGR_PPR{:, [4 5]} = PGR{:, [4 5]} - [Vew_est, Vns_est];
 for i = 1:height(PGR_PPR)
 
     for k = 1:height(LSQ)
+        if strcmpi(PGR_PPR{i,6},LSQ{k,6})
+    EAST(1,i) =  LSQ{k,1} - PGR_PPR{i,4};
+    NORTH(1,i) =  LSQ{ k,02 }- PGR_PPR{i,5};
+    UP(1,i) = LSQ{k,3} - PGR_PPR{i,3};
+   names{1,i} = cell2mat(PGR_PPR{i,6});
         end
         end
 
