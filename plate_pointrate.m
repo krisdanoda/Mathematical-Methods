@@ -1,14 +1,14 @@
-clear
+
 a=6378137 ;
 
 %load data file
-A=load('test_data.txt') ;
-n = length(A) ;
+A=(ICEPGR5GUEN) ;
+n = height(A) ;
 
-L=A(:,1)*pi/180 ;     % bredde i grader fra input fil
-M=A(:,2)*pi/180 ;     % længde i grader fra input fil
-Vns_obs=A(:,3) ;
-Vew_obs=A(:,4) ;
+L=A{:,1}*pi/180 ;     % bredde i grader fra input fil
+M=A{:,2}*pi/180 ;     % længde i grader fra input fil
+Vns_obs=A{:,3} ;
+Vew_obs=A{:,4} ;
 
 whos
 
@@ -38,13 +38,13 @@ load coast
 subplot(2,1,1)
 plot(long,lat)
 hold
-quiver(A(:,2),A(:,1),A(:,4),A(:,3),1)
+quiver(A{:,2},A{:,1},A{:,4},A{:,3},1)
 axis([-180 -20 10 90])
 
 subplot(2,1,2)
 plot(long,lat)
 hold
-quiver(A(:,2),A(:,1),Vew_est,Vns_est,1)
+quiver(A{:,2},A{:,1},Vew_est,Vns_est,1)
 axis([-180 -20 10 90])
 
 %figure(2)
