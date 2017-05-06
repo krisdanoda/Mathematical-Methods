@@ -19,10 +19,10 @@ whos
 %plat = atan(wz / sqrt (wx*wx+wy*wy)) 
 %plon = atan(wy/wx) 
 
-T=25*pi/180   % bredde for euler pol 
-P=-82*pi/180  % længde for euler pol
+T=-2.299*pi/180   % bredde for euler pol 
+P=-85.540*pi/180  % længde for euler pol
 % rotations hastighed
-w= 0.22*(pii/180)/1000000  % rotations hastighed for euler pol
+w= 0.207*(pi/180)/1000000  % rotations hastighed for euler pol
 
 
 % rotation rate

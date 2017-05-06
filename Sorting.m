@@ -28,6 +28,7 @@ end
 end
 
 %%
+Dable = {}
 
 for i = 1:height(coordinates)
 
@@ -37,7 +38,6 @@ for i = 1:height(coordinates)
     Dable{i,4} = coordinates{i,1}
     Dable{i,5} = coordinates{i,2}
     Dable{i,6} = cell2mat(coordinates{i,3})
-
 
 end
 

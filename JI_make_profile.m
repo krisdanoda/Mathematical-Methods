@@ -104,11 +104,12 @@ ylabel('hastighed - km/yr')
 
 % nu beregnes masse flxen gennem profilen % engenden er Gigaton/år
 for i=1:length(profilv_z)
-    flux(i)=1.0 * profilv_z(i)*0.001 * profilv_dv(i)*0.001 * 0.917  ;
+    D_flux(i)=1.0 * profilv_z(i)*0.001 * profilv_dv(i)*0.001 * 0.917  ;
+    
 end
 
 
-Giga_ton_is_pr_aar = sum(flux)
+D_flux_Giga_ton_is_pr_aar = sum(D_flux)
 
 figure(4)
 subplot(1,3,1)
@@ -118,4 +119,49 @@ quiver(B2(:,1),B2(:,2),B2(:,3),B2(:,4))
 subplot(1,3,3)
 quiver(B2(:,1),B2(:,2),A2(:,3)-B2(:,3),A2(:,4)-B2(:,4))
 
+%%  Plotting the fucking flux
+
+R1=load('JI_00_01.xy');
+
+R2=load('JI_05_06.xy');
+
+R3=load('JI_06_07.xy');
+
+R4=load('JI_08_09.xy');
+
+R5=load('JI_09_10.xy');
+
+R6=load('JI_00_01.xy');
+
+
+Leek = {R1 R2 R3 R4 R5 R6};
+
+for k = 1 :length(Leek)
+
+
+
+flux = [];
+data_k = cell2mat(Leek(k));
+hastighed = data_k(:,3);
+for i=1:length(A)
+
+
+    if(A(i,1) == x1)
+        if(A(i,2) < y2 & A(i,2) > y1)
+            j=j+1;
+            profilv_x(j) = A(i,1) ;
+            profilv_y(j) = A(i,2) ;
+            profilv_z(j) = is_tykkelse(i) ;
+	    profilv_v(j) = hastighed(i) ;
+        end
+    end
+end
+
+for i=1:length(profilv_z)
+    flux(i)=1.0 * profilv_z(i)*0.001 * profilv_v(i)*0.001 * 0.917  ;
+end
+
+flux_plot(k) =  sum(flux);
+    
+end
 
