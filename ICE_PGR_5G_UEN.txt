@@ -1,6 +1,5 @@
-% horizontal PGR motion from ICE-5G 
-%     lat            long       Up	 East       North  site
-%       deg           deg      mm/yr 	mm/yr     mm/yr   
+    lat            long       Up	 East       North  site
+       deg           deg      mm/yr 	mm/yr     mm/yr   
    76.53733698  -68.78800630    0.31 	-0.08     -0.50   % THU1
    66.98741752  -50.94483485   -0.83 	 0.66      0.37    % KELY
    65.57933345  -37.14935346   -0.57 	-0.12      0.17   % KULU
