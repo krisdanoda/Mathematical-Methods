@@ -9,6 +9,7 @@
 
 % Projektionsfunctionen m_proj definerer området som skal plottes, og
 % hvilken form området skal tage på et plot. 
+addpath('C:\Program Files\MATLAB\R2016a\toolbox\matlab\m_map','C:\Program Files\MATLAB\R2016a\toolbox\matlab\m_map','C:\Users\Kristofer Pedersen\Documents\Desuku\DTU\New folder\cn (9)\DAY02')
 m_proj('albers equal-area','long',[-77 -8],'lat',[57 85],'rectbox','off'); % rectbox can ændres fra 'off' til 'on' for at generere et kvadratisk plot
 
 data = elastic_deformation_theoretical(:,1:5)
@@ -34,10 +35,10 @@ m_scatter(data(:,5),data(:,4),100,data(:,3),'filled'); % "m_scatter" fungerer me
 hold on;
 m_gshhs_i('color','k'); % Definer kystlinjen (se endvidere scripts fra Lektion 1 for mere info)
 m_grid('xtick',10,'ytick',8,'linewi',1,'tickstyle','dm','tickdir','in','XAxisLocation','bottom','yaxisloc','left'); % Definer gridparametre
-title('Et styks flot plot.', 'FontSize',15)
+title('Theoretical', 'FontSize',15)
 ax=gca;
 
-m_quiver(data(:,5),data(:,4),data(:,1),data(:,2))
+m_quiver(data(:,5),data(:,4),-data(:,1),-data(:,2),2)
 
 hold off
 % m_quiver(data(:,5),data(:,4),log10(abs(data(:,1))).*abs(data(:,1))./data(:,1),log10(abs(data(:,2))).*abs(data(:,2))./data(:,2))
@@ -48,7 +49,7 @@ hold off
 % intervallet [-90:90] (fra geografisk syd til geografisk nord).
 % m_maps anvender per definition intervallet [-180:180] til længdegrader,
 % og intervallet [-90:90] til breddegrader.
-data2 = Elastic_deformation(:,1:5)
+data2 = GPS_elastic(:,1:5)
 
 
 data2 = table2array(data2)
@@ -73,10 +74,10 @@ m_scatter(data2(:,5),data2(:,4),100,data2(:,3),'filled'); % "m_scatter" fungerer
 hold on;
 m_gshhs_i('color','k'); % Definer kystlinjen (se endvidere scripts fra Lektion 1 for mere info)
 m_grid('xtick',10,'ytick',8,'linewi',1,'tickstyle','dm','tickdir','in','XAxisLocation','bottom','yaxisloc','left'); % Definer gridparametre
-title('Et styks flot plot.', 'FontSize',15)
+title('LSQ', 'FontSize',15)
 ax=gca;
 
-m_quiver(data2(:,5),data2(:,4),data2(:,1),data2(:,2))
+m_quiver(data2(:,5),data2(:,4),data2(:,2),data2(:,3))
 % m_quiver(data2(:,5),data2(:,4),log10(abs(data2(:,1))).*abs(data2(:,1))./data2(:,1),log10(abs(data2(:,2))).*abs(data2(:,2))./data2(:,2))
 
 %%
@@ -115,7 +116,26 @@ m_grid('xtick',10,'ytick',8,'linewi',1,'tickstyle','dm','tickdir','in','XAxisLoc
 title('Et styks flot plot.', 'FontSize',15)
 ax=gca;
 
-m_quiver(data3(:,5),data3(:,4),data3(:,1),data3(:,2))
+m_quiver(data3(:,5),data3(:,4)./data3(:,4),data3(:,1)./abs(data3(:,1)),data3(:,2)./abs(data3(:,2)))
 % m_quiver(data3(:,5),data3(:,4),log10(abs(data3(:,1))).*abs(data3(:,1))./data3(:,1),log10(abs(data3(:,2))).*abs(data3(:,2))./data3(:,2))
 
-%%
+%% plotting bar
+
+% for i = 1:51
+% stations(i) = cell2mat(hist{i,4});
+% end
+
+
+hold on
+bar(1:51,cell2mat(hist(:,1)),0.75,'FaceColor',[0.2 0.2 0.5])
+bar(1:51,cell2mat(hist(:,2)),0.5,'FaceColor',[0.0 0.7 0.7])
+bar(1:51,cell2mat(hist(:,3)),0.25,'FaceColor',[0.7 0.2 0.7])
+grid on
+grid minor
+legend({'GPS Elastic Deformation','Observed Elastic Deformation','Theoretical Elastic Deformation'},'Location','northwest')
+ax = gca;
+ax.XTick = 1:51; 
+ax.XTickLabels = stations;
+
+ax.XTickLabelRotation = 80;
+

@@ -49,7 +49,7 @@ for i = 1:height(GPS_elastic)
     for k = 1:height(LSQ)
         if strcmpi(GPS_elastic{i,6},LSQ{k,6})
             
-            for j = 1:height(elastic_deformation_theoretical)
+            for j = height(elastic_deformation_theoretical)
                 if strcmpi(GPS_elastic{i,6},elastic_deformation_theoretical{j,6})
                     hist{J,1} = GPS_elastic{i,1};
                     hist{J,2} = LSQ{k,3};
@@ -63,5 +63,4 @@ for i = 1:height(GPS_elastic)
     end
 
 end
-
 
