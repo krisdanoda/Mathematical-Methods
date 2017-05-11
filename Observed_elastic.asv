@@ -62,4 +62,4 @@ PGR_PPR_bol = logical(PGR_PPR_bol);
 
 end
 
-Elastic_deformation = table(EAST(PGR_PPR_bol),NORTH(PGR_PPR_bol),UP(PGR_PPR_bol),PGR{logical(PGR_PPR_bol),1},PGR{logical(PGR_PPR_bol),2},names(PGR_PPR_bol),'VariableNames',{'East','North','Uplift','Lat','Lon','Station'})
+table(EAST(PGR_PPR_bol),NORTH(PGR_PPR_bol),UP(PGR_PPR_bol),PGR{logical(PGR_PPR_bol),1},PGR{logical(PGR_PPR_bol),2},names(PGR_PPR_bol),'variablenames',{)
