@@ -235,10 +235,12 @@ flux_plot_NG(k) =  sum(flux_NG);
     
 end
 figure(6)
-years = [01 06 07 08 09 13];
+years = [2001 2006 2007 2008 2009 2013];
 hold
 plot(years,flux_plot)
 plot(years,flux_plot,'b*')
+ylabel('Flux Gigaton of ice yr^{-1}', 'Fontsize', 15)
+xlabel('Year', 'Fontsize', 15)
 figure(7)
 
 hold

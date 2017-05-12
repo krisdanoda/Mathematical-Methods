@@ -64,4 +64,27 @@ for i = 1:height(GPS_elastic)
 
 end
 
+%%
+J = 1;
+hist = [];
+
+for i = 1:height(GPS_elastic)
+    
+    for k = 1:height(LSQ)
+        if strcmpi(GPS_elastic{i,6},LSQ{k,6})
+            
+            for j = 1:height(ICEPGR5GUEN)
+                if strcmpi(GPS_elastic{i,6},ICEPGR5GUEN{j,6})
+                    hist{J,1} = GPS_elastic{i,1};
+                    hist{J,2} = LSQ{k,3};
+                    hist{J,3} = ICEPGR5GUEN{j,5};
+                    hist{J,4} = GPS_elastic{i,6};
+                    J = J +1;
+                end
+                
+            end
+        end
+    end
+
+end
 

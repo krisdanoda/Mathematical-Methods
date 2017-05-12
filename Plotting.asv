@@ -33,7 +33,6 @@ data(rlon,:)=[]; % Fjern disse datarækker fra datamatricen
 figure('units','normalized','outerposition',[0 0 1 1])
 colormap jet % Min personlige favorit, idet at: lav bølgelængde = "kolde" farver = lave værdier, og høj bølgelængde = "varme" farver = høje værdier
 m_scatter(data(:,5),data(:,4),100,data(:,3),'filled'); % "m_scatter" fungerer meget lig "scatter", når det kommer til input-argumenter
-caxis([-1,25])
 h = colorbar('location','Eastoutside');
 hold on;
 m_gshhs_i('color','k'); % Definer kystlinjen (se endvidere scripts fra Lektion 1 for mere info)
@@ -64,16 +63,18 @@ data2(:,5)=rem((data2(:,5)+180),360)-180;
 % scattered datapunkter.
 
 
+
+subplot(1,2,2)
 figure('units','normalized','outerposition',[0 0 1 1])
 colormap jet % Min personlige favorit, idet at: lav bølgelængde = "kolde" farver = lave værdier, og høj bølgelængde = "varme" farver = høje værdier
 m_scatter(data2(:,5),data2(:,4),100,data2(:,1),'filled'); % "m_scatter" fungerer meget lig "scatter", når det kommer til input-argumenter
-caxis([-1,25])
 hold on;
 m_gshhs_i('color','k'); % Definer kystlinjen (se endvidere scripts fra Lektion 1 for mere info)
 m_grid('xtick',10,'ytick',8,'linewi',1,'tickstyle','dm','tickdir','in','XAxisLocation','bottom','yaxisloc','left'); % Definer gridparametre
 title('Observed Data', 'FontSize',15)
 ax=gca;
 h = colorbar('location','Eastoutside');
+
 m_quiver(data2(:,5),data2(:,4),data2(:,2),data2(:,3))
 % m_quiver(data2(:,5),data2(:,4),log10(abs(data2(:,1))).*abs(data2(:,1))./data2(:,1),log10(abs(data2(:,2))).*abs(data2(:,2))./data2(:,2))
 
