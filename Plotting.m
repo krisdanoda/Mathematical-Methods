@@ -121,10 +121,8 @@ m_quiver(data3(:,5),data3(:,4)./data3(:,4),data3(:,1)./abs(data3(:,1)),data3(:,2
 
 %% plotting bar
 
-% for i = 1:51
-% stations(i) = cell2mat(hist{i,4});
-% end
-
+stations = cell2table(hist(:,4))
+stations = stations{:,:}
 
 hold on
 bar(1:51,cell2mat(hist(:,1)),0.75,'FaceColor',[0.2 0.2 0.5])
@@ -133,9 +131,11 @@ bar(1:51,cell2mat(hist(:,3)),0.25,'FaceColor',[0.7 0.2 0.7])
 grid on
 grid minor
 legend({'GPS Elastic Deformation','Observed Elastic Deformation','Theoretical Elastic Deformation'},'Location','northwest')
+ylim([-3 27])
 ax = gca;
 ax.XTick = 1:51; 
 ax.XTickLabels = stations;
 
 ax.XTickLabelRotation = 80;
+
 

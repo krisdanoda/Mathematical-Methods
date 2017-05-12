@@ -4,7 +4,7 @@ close all
 A=load('ZI_NG_fjeld_overfl.xy');
 
 % ind 2 filer med is hastigheder
-A2=load('ZI_NG_05_06.xy');
+A2=load('ZI_NG_12_13.xy');
 B2=load('ZI_NG_00_01.xy');
 
 %indlæs gletsjer front linie 
@@ -129,7 +129,7 @@ xlabel('afstand in km')
 ylabel('hastighed - km/yr')
 
 
-% nu beregnes masse flxen gennem profilen % engenden er Gigaton/år
+% nu beregnes masse flxen gennem profilen % enhenden er Gigaton/år
 for i=1:length(profilv_z)
     D_flux(i)=1.0 * profilv_z(i)*0.001 * profilv_dv(i)*0.001 * 0.917  ;
     
@@ -137,6 +137,15 @@ end
 
 
 D_flux_Giga_ton_is_pr_aar = sum(D_flux)
+
+for i=1:length(profilv_z)
+    D_flux_NG(i)=1.0 * profilv_z_NG(i)*0.001 * profilv_dv_NG(i)*0.001 * 0.917  ;
+    
+end
+
+
+D_flux_Giga_ton_is_pr_aar_NG = sum(D_flux_NG)
+
 figure(4)
 subplot(1,3,1)
 quiver(A2(:,1),A2(:,2),A2(:,3),A2(:,4),10)
@@ -147,20 +156,23 @@ quiver(B2(:,1),B2(:,2),A2(:,3)-B2(:,3),A2(:,4)-B2(:,4))
 
 %%  Plotting the fucking flux
 
-R1=load('JI_00_01.xy');
 
-R2=load('JI_05_06.xy');
+R1=load('ZI_NG_00_01.xy');
 
-R3=load('JI_06_07.xy');
+R2=load('ZI_NG_05_06.xy');
 
-R4=load('JI_08_09.xy');
+R3=load('ZI_NG_06_07.xy');
 
-R5=load('JI_09_10.xy');
+R4=load('ZI_NG_07_08.xy');
 
-R6=load('JI_00_01.xy');
+R5=load('ZI_NG_08_09.xy');
+
+R6=load('ZI_NG_12_13.xy');
+
 
 
 Leek = {R1 R2 R3 R4 R5 R6};
+flux_plot = []
 
 for k = 1 :length(Leek)
 
@@ -169,11 +181,13 @@ for k = 1 :length(Leek)
 flux = [];
 data_k = cell2mat(Leek(k));
 hastighed = data_k(:,3);
+
+j = 0;
 for i=1:length(A)
 
 
-    if(A(i,1) == x1)
-        if(A(i,2) < y2 & A(i,2) > y1)
+    if(data_k(i,1) == x1)
+        if(data_k(i,2) < y2 & data_k(i,2) > y1)
             j=j+1;
             profilv_x(j) = A(i,1) ;
             profilv_y(j) = A(i,2) ;
@@ -191,3 +205,42 @@ flux_plot(k) =  sum(flux);
     
 end
 
+
+for k = 1 :length(Leek)
+
+
+
+flux_NG = [];
+data_k_NG = cell2mat(Leek(k));
+hastighed_NG = data_k_NG(:,4);
+
+j = 0;
+for i=1:length(A)
+    if(data_k(i,2) == y3)
+        if(data_k(i,1) < x4 & data_k(i,1) > x3)
+            j=j+1;
+            profilv_x_NG(j) = A(i,1) ;
+            profilv_y_NG(j) = A(i,2) ;
+            profilv_z_NG(j) = is_tykkelse(i) ;
+	    profilv_v_NG(j) = hastighed_NG(i) ;
+        end
+    end
+end
+
+for i=1:length(profilv_z)
+    flux_NG(i)=1.0 * profilv_z_NG(i)*0.001 * profilv_v_NG(i)*0.001 * 0.917  ;
+end
+
+flux_plot_NG(k) =  sum(flux_NG);
+    
+end
+figure(6)
+years = [01 06 07 08 09 13];
+hold
+plot(years,flux_plot)
+plot(years,flux_plot,'b*')
+figure(7)
+
+hold
+plot(years,flux_plot_NG)
+plot(years,flux_plot_NG,'b*')

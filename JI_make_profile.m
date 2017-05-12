@@ -4,8 +4,8 @@ clear
 A=load('JI_fjeld_overfl.xy');
 
 % ind 2 filer med is hastigheder
-A2=load('JI_05_06.xy');
-B2=load('JI_00_01.xy');
+A2=load('JI_00_01.xy');
+B2=load('JI_2013.xy');
 
 %indlæs gletsjer front linie 
 front=load('JI_front.xy') ;
@@ -120,6 +120,23 @@ subplot(1,3,3)
 quiver(B2(:,1),B2(:,2),A2(:,3)-B2(:,3),A2(:,4)-B2(:,4))
 
 %%  Plotting the fucking flux
+clear
+
+% indlæs data for grundfjeldet og isens højde 
+A=load('JI_fjeld_overfl.xy');
+
+y2=-2220000 ;
+y1=-2280000;
+
+x1=-415000 ;
+
+
+
+for i=1:length(A)
+ is_tykkelse(i)=A(i,4)-A(i,3) ;      % her beregnes is tykkelsen
+end
+
+
 
 R1=load('JI_00_01.xy');
 
@@ -131,10 +148,12 @@ R4=load('JI_08_09.xy');
 
 R5=load('JI_09_10.xy');
 
-R6=load('JI_00_01.xy');
+R6=load('JI_2013.xy');
+
 
 
 Leek = {R1 R2 R3 R4 R5 R6};
+flux_plot = []
 
 for k = 1 :length(Leek)
 
@@ -143,11 +162,13 @@ for k = 1 :length(Leek)
 flux = [];
 data_k = cell2mat(Leek(k));
 hastighed = data_k(:,3);
+
+j = 0;
 for i=1:length(A)
 
 
-    if(A(i,1) == x1)
-        if(A(i,2) < y2 & A(i,2) > y1)
+    if(data_k(i,1) == x1)
+        if(data_k(i,2) < y2 & data_k(i,2) > y1)
             j=j+1;
             profilv_x(j) = A(i,1) ;
             profilv_y(j) = A(i,2) ;
@@ -165,3 +186,10 @@ flux_plot(k) =  sum(flux);
     
 end
 
+
+
+years = [2001 2006 2007 2009 2010 2013];
+figure(5)
+hold
+plot(years,flux_plot)
+plot(years,flux_plot,'b*')
